@@ -12,6 +12,24 @@ import './CaseStudiesPage.css';
 
 export const caseStudies = [
   {
+    id: 'tarazu-siddhant',
+    title: 'Tarazu Siddhant Academy',
+    category: 'FinTech / EdTech',
+    description: 'Live trading classes, option chain analysis, and advanced LTP Calculator tools for stock market traders.',
+    fullInfo: 'We built an educational and analytics platform for Tarazu Siddhant Academy that integrates real-time live trading classes with an advanced option chain analysis tool and LTP calculator. This allows students and traders to access expert training and critical market data in one unified, high-performance dashboard.',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800',
+    stats: ['10,000+ Active Traders', 'Real-time LTP Calculations']
+  },
+  {
+    id: 'sanatan-reet',
+    title: 'Sanatan Reet',
+    category: 'E-Commerce / Entertainment',
+    description: 'A unique platform delivering custom-crafted personalized songs for weddings, birthdays, and anniversaries.',
+    fullInfo: 'Sanatan Reet needed a seamless digital experience for customers to order personalized music for special occasions. We developed an intuitive eCommerce order flow that captures user stories, matches them with artists, and delivers custom audio tracks, streamlining the entire creative process from brief to final delivery.',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800',
+    stats: ['500+ Custom Songs Delivered', '100% Client Satisfaction']
+  },
+  {
     id: '45-degrees',
     title: '45 Degrees: Automation Scale',
     category: 'Enterprise Automation',
@@ -87,62 +105,41 @@ const CaseStudiesPage = () => {
           </div>
         </section>
 
-        {/* Growth/Grid Section */}
-        <section className="sw-growth">
-          <div className="sw-growth-inner">
-            <AnimateOnScroll animation="fade-up" delay={0.1} className="sw-growth-header">
-              <h2 className="sw-growth-title">
-                Fueling Growth Through Bespoke Engineering
-              </h2>
-              <p className="sw-growth-desc">
-                Explore our portfolio of successful projects and see how we help businesses grow through advanced technology and intelligent solutions.
-              </p>
-            </AnimateOnScroll>
-
-            {/* Grid */}
-            <div className="sw-cards-grid">
-              {caseStudies.map((item, idx) => {
-                const id = String(idx + 1).padStart(2, '0');
-                const colors = ['#E11D2E', '#3b5eff', '#ff6b35', '#a855f7'];
-                const accentColor = colors[idx % colors.length];
-                
-                return (
-                  <AnimateOnScroll key={item.id} animation="fade-up" delay={idx * 0.08} className="sw-benefit-card case-card">
-                    <div className="sw-card-accent" style={{ backgroundColor: accentColor }}></div>
-                    
-                    <div className="case-image">
-                      <img src={item.image} alt={item.title} />
-                      <div className="case-category" style={{ borderLeft: `3px solid ${accentColor}` }}>{item.category}</div>
+        {/* Grid Section matching screenshot layout */}
+        <section className="portfolio-section">
+          <div className="portfolio-container">
+            {caseStudies.map((item, idx) => (
+              <AnimateOnScroll key={item.id} animation="fade-up" delay={0.1} className="portfolio-card">
+                <div className="portfolio-card-left">
+                  <div className="portfolio-image-wrapper">
+                    <img src={item.image} alt={item.title} />
+                    <div className="portfolio-image-overlay">
+                      <span className="overlay-arrow">↗</span> {item.title}
                     </div>
-                    
-                    <div className="sw-card-header" style={{ marginTop: '16px', marginBottom: '8px' }}>
-                      <span className="sw-card-number">{id}</span>
-                    </div>
-                    
-                    <h3 className="sw-card-title">{item.title}</h3>
-                    <p className="sw-card-desc">{item.description}</p>
-                    
-                    <div className="sw-card-benefit">
-                      <span className="sw-benefit-label" style={{ backgroundColor: accentColor }}>Impact Metrics</span>
-                      <ul style={{ margin: '8px 0 0 0', padding: 0, listStyle: 'none' }}>
-                        {item.stats.map((stat, sIdx) => (
-                          <li key={sIdx} style={{ fontSize: '13.5px', color: '#555', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                            <span style={{ color: accentColor, fontWeight: 'bold', fontSize: '14px' }}>✓</span> {stat}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-                      <Link to={`/case-studies/${item.id}`} className="view-btn">
-                        <span>View Case Study</span>
-                        <ExternalLink size={16} />
-                      </Link>
-                    </div>
-                  </AnimateOnScroll>
-                );
-              })}
-            </div>
+                  </div>
+                </div>
+                <div className="portfolio-card-right">
+                  <h2 className="portfolio-title">{item.title}</h2>
+                  <p className="portfolio-desc">{item.fullInfo}</p>
+                  
+                  <div className="portfolio-stats">
+                    {item.stats.map((stat, sIdx) => {
+                      const statParts = stat.split(' ');
+                      const metric = statParts[0];
+                      const label = statParts.slice(1).join(' ');
+                      return (
+                        <div key={sIdx} className="stat-block">
+                          <div className="stat-value">
+                            <span className="stat-square">■</span> {metric}
+                          </div>
+                          <div className="stat-label">{label}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </AnimateOnScroll>
+            ))}
           </div>
         </section>
       </main>
